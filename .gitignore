@@ -1,0 +1,6 @@
+# python cache
+.idea/
+**/__pycache__/
+
+# temp directory
+**/temp/
