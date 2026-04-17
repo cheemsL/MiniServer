@@ -1,7 +1,9 @@
 import uvicorn
 from fastapi import (
     FastAPI,
-    Request
+    Request,
+    WebSocket,
+    WebSocketDisconnect
 )
 from fastapi.responses import (
     HTMLResponse
@@ -52,8 +54,35 @@ async def index(request: Request):
         request, "index.html",
         context={
             "title": "mini server",
+            "host_ip": "192.168.110.137",
+            "port": 9000
         }
     )
+
+
+@app.get("/test")
+async def test():
+    return "服务器收到了你的get请求"
+
+
+@app.post("/test")
+async def test():
+    return "服务器收到了你的post请求"
+
+
+@app.websocket("/test")
+async def test(
+        websocket: WebSocket
+):
+    await websocket.accept()
+
+    try:
+        while True:
+            data = await websocket.receive_json()
+            await websocket.send_text("服务器收到了你的websocket消息")
+
+    except WebSocketDisconnect:
+        pass
 
 
 if __name__ == '__main__':
