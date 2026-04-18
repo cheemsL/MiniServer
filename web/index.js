@@ -1,7 +1,7 @@
 console.log(`welcome to mini server.`)
 
 
-const host_ip = "192.168.110.137"
+const host_ip = "192.168.0.102"
 const port = 9000
 
 
