@@ -54,8 +54,8 @@ async def index(request: Request):
         request, "index.html",
         context={
             "title": "mini server",
-            "host_ip": "192.168.0.102",
-            "port": 9000
+            "host_ip": "103.74.192.182",
+            "port": 10086
         }
     )
 

@@ -1,17 +1,17 @@
 console.log(`welcome to mini server.`)
 
 
-const host_ip = "192.168.0.102"
-const port = 9000
-
-
+const baseUrlContainer = document.querySelector("#base-url-container")
 const messageContainer = document.querySelector("#message-container")
 const getButton = document.querySelector('#get-button')
 const postButton = document.querySelector('#post-button')
 const websocketButton = document.querySelector('#websocket-button')
 
 
-const websocket = new WebSocket(`ws://${host_ip}:${port}/test`)
+const baseUrl = baseUrlContainer.textContent
+
+
+const websocket = new WebSocket(`ws://${baseUrl}/test`)
 websocket.onmessage = (event) => {
     const message = event.data
     appendMessage(message)
@@ -42,7 +42,7 @@ function appendMessage(message) {
 getButton.addEventListener('click', async (event) => {
     console.log('get button clicked')
     const response = await fetch(
-        `http://${host_ip}:${port}/test`,
+        `http://${baseUrl}/test`,
         {
             method: 'GET',
         }
@@ -56,7 +56,7 @@ getButton.addEventListener('click', async (event) => {
 postButton.addEventListener('click', async (event) => {
     console.log('post button clicked')
     const response = await fetch(
-        `http://${host_ip}:${port}/test`,
+        `http://${baseUrl}/test`,
         {
             method: 'POST',
         }
